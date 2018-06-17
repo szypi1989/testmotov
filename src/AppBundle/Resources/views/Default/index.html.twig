@@ -5,24 +5,26 @@ Auto giełda
 {% block contents %}
 <div class="col-sm-12">
 <div class="well ">Wszystkie ogłoszenia (kliknij aby uzyskać więcej informacji)</div>
-
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
 
 <table class="table table-bordered">
     <thead>
         <tr class="info">
             <th>Zdjęcie</th>
-            <th>Model</th>
-            <th>Marka</th>
-            <th>Cena</th>
-            <th>Silnik</th>
-            <th>Moc</th>
-            <th>Typ silnika</th>
-            <th>Rok produkcji:</th>
-            <th>Typ nadwozia:</th>
+<th>{{ knp_pagination_sortable(pagination, 'Model', 'a.model') }}{% if pagination.isSorted('a.model') %} {% if pagination.getDirection()=='desc'%}<i class="glyphicon glyphicon-menu-up"></i>{% else %}<i class="glyphicon glyphicon-menu-down"></i>{% endif %}{% endif %}</th>
+<th>{{ knp_pagination_sortable(pagination, 'Marka', 'a.mark') }} {% if pagination.isSorted('a.mark') %}{% if pagination.getDirection()=='desc'%}<i class="glyphicon glyphicon-menu-up"></i>{% else %}<i class="glyphicon glyphicon-menu-down"></i>{% endif %}{% endif %}</th>
+<th>{{ knp_pagination_sortable(pagination, 'Cena', 'a.price') }} {% if pagination.isSorted('a.price') %}{% if pagination.getDirection()=='desc'%}<i class="glyphicon glyphicon-menu-up"></i>{% else %}<i class="glyphicon glyphicon-menu-down"></i>{% endif %}{% endif %}</th>
+<th>{{ knp_pagination_sortable(pagination, 'Silnik', 'a.engine') }} {% if pagination.isSorted('a.engine') %}{% if pagination.getDirection()=='desc'%}<i class="glyphicon glyphicon-menu-up"></i>{% else %}<i class="glyphicon glyphicon-menu-down"></i>{% endif %}{% endif %}</th>
+<th>{{ knp_pagination_sortable(pagination, 'Moc', 'a.power') }} {% if pagination.isSorted('a.power') %}{% if pagination.getDirection()=='desc'%}<i class="glyphicon glyphicon-menu-up"></i>{% else %}<i class="glyphicon glyphicon-menu-down"></i>{% endif %}{% endif %}</th>
+<th>{{ knp_pagination_sortable(pagination, 'Typ silnika', 'a.enginetype') }}{% if pagination.isSorted('a.enginetype') %} {% if pagination.getDirection()=='desc'%}<i class="glyphicon glyphicon-menu-up"></i>{% else %}<i class="glyphicon glyphicon-menu-down"></i>{% endif %}{% endif %}</th>
+<th>{{ knp_pagination_sortable(pagination, 'Rok produkcji', 'a.year') }}{% if pagination.isSorted('a.year') %} {% if pagination.getDirection()=='desc'%}<i class="glyphicon glyphicon-menu-up"></i>{% else %}<i class="glyphicon glyphicon-menu-down"></i>{% endif %}{% endif %}</th>
+<th>{{ knp_pagination_sortable(pagination, 'Typ nadwozia', 'a.bodytype') }}{% if pagination.isSorted('a.bodytype') %} {% if pagination.getDirection()=='desc'%}<i class="glyphicon glyphicon-menu-up"></i>{% else %}<i class="glyphicon glyphicon-menu-down"></i>{% endif %}{% endif %}</th>
         </tr>
     </thead>
     <tbody>
-        {% for imie in entities %}
+        {% for imie in pagination %}
             <tr data-href="{{ path('view', {'page': imie.id}) }}" style="cursor:pointer;">
                 <td><img src="{{asset('images/'~imie.id~'.jpg?') }}{{ date().timestamp }}" style="max-height:130px; width:auto;" class="img-thumbnail"></td>
                 <td>{{ imie.model }}</td>
@@ -41,7 +43,9 @@ Auto giełda
     </tbody>
     
   </table>
-
+        <div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
 </div>
   
 {% endblock %}
