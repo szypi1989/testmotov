@@ -1,0 +1,11 @@
+parameters:
+    database_host: nuskkyrsgmn5rw8c.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+    database_port: 3306
+    database_name: pkcho157bl32kcao
+    database_user: c39g43n8bpghxdqo
+    database_password: fk915mg6i1xtekwz
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: szypula89@onet.pl
+    mailer_password: haker777
+    secret: ThisTokenIsNotSoSecretChangeIt
