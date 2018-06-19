@@ -1,0 +1,25 @@
+[1mdiff --git a/src/AppBundle/Controller/DefaultController.php b/src/AppBundle/Controller/DefaultController.php[m
+[1mindex 068d384..1072526 100644[m
+[1m--- a/src/AppBundle/Controller/DefaultController.php[m
+[1m+++ b/src/AppBundle/Controller/DefaultController.php[m
+[36m@@ -15,9 +15,14 @@[m [mclass DefaultController extends Controller[m
+      */[m
+     public function indexAction(Request $request)[m
+     {[m
+[31m-         $em = $this->getDoctrine()->getEntityManager();[m
+[31m-    $entities = $em->getRepository('AppBundle:Cars')->findAll();[m
+[31m-                return array('entities' => $entities);[m
+[31m-        // replace this example code with whatever you need[m
+[32m+[m[32m        $em = $this->getDoctrine()->getEntityManager();[m
+[32m+[m[32m        $query = $em->createQuery("SELECT a FROM AppBundle:Cars a");[m[41m  [m
+[32m+[m[32m        $paginator  = $this->get('knp_paginator');[m
+[32m+[m[32m        $pagination = $paginator->paginate([m
+[32m+[m[32m        $query, /* query NOT result */[m
+[32m+[m[32m        $request->query->getInt('page', 1)/*page number*/,[m
+[32m+[m[32m        5/*limit per page*/,array('defaultSortFieldName' => 'a.model', 'defaultSortDirection' => 'asc')[m
+[32m+[m[32m        );[m[41m    [m
+[32m+[m[32m        return array('pagination' => $pagination);[m
+     }[m
+ }[m
+warning: LF will be replaced by CRLF in src/AppBundle/Controller/DefaultController.php.
+The file will have its original line endings in your working directory.
