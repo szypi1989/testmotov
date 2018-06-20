@@ -4,7 +4,21 @@ Auto giełda
 {% endblock %}
 {% block contents %}
 <div class="col-sm-12">
-<div class="well ">Wszystkie ogłoszenia (kliknij aby uzyskać więcej informacji)</div>
+<div class="well ">Wszystkie ogłoszenia (kliknij aby uzyskać więcej informacji)
+    {% if filtr is defined %}
+    <br>
+    <div class="alert alert-info">
+        {% set array = [] %}
+    {% set array = { 'apple': 'unknown' }|merge(transfiltr) %}
+
+        <strong><i>Filtrowanie:</i></strong>
+        {% for key,value in filtr %}
+            <b>[ {{transfiltr[key]}} : {{value}} ]</b>  
+        {% endfor %}
+    </div>
+{% endif %}
+
+</div>
 <div class="navigation">
     {{ knp_pagination_render(pagination) }}
 </div>
@@ -44,8 +58,8 @@ Auto giełda
     
   </table>
         <div class="navigation">
-    {{ knp_pagination_render(pagination) }}
-</div>
+        {{ knp_pagination_render(pagination) }}
+        </div>
 </div>
   
 {% endblock %}

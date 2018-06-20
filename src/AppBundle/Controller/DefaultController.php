@@ -64,15 +64,26 @@ class DefaultController extends Controller
 
                 if(($request->request->get('form')['enginea']!='0') || ($request->request->get('form')['engineb']!='0')){
                 $qb->andwhere('a.engine = :enginez');   
-                if((($request->request->get('form')['enginea'])=='0') ){
-                $array_par['enginez']=('0.'.$request->request->get('form')['engineb']);
-                }elseif((($request->request->get('form')['engineb'])=='0') ){
-                $array_par['enginez']=(integer)($request->request->get('form')['enginea'].'.0'); 
-                }else{
-                $array_par['enginez']=($request->request->get('form')['enginea']).'.'.($request->request->get('form')['engineb']);  
-                }          
-                }               
-              
+                    if((($request->request->get('form')['enginea'])=='0') ){
+                    $array_par['enginez']=('0.'.$request->request->get('form')['engineb']);
+                    }elseif((($request->request->get('form')['engineb'])=='0') ){
+                    $array_par['enginez']=(integer)($request->request->get('form')['enginea'].'.0'); 
+                    }else{
+                    $array_par['enginez']=($request->request->get('form')['enginea']).'.'.($request->request->get('form')['engineb']);  
+                    }          
+                }      
+
+                $trans_arr = array(
+                "yearfrom" => "rok od",
+                "yearto" => "rok do",
+                "pricefrom" => "cena od",
+                "priceto" => "cena do",
+                "enginetype" => "typ silnika",
+                "model" => "model",
+                "mark" => "marka",
+                "bodytype" => "typ_nadwozia",
+                "enginez" => "pojemność",
+                );
                 $qb->setParameters($array_par); 
                 $querys=$qb->getQuery()->getDQL();
                     foreach ($qb->getParameters() as $index => $param){  
@@ -86,7 +97,7 @@ class DefaultController extends Controller
                 $request->query->getInt('page', 1)/*page number*/,
                 5/*limit per page*/,array('defaultSortFieldName' => 'a.model', 'defaultSortDirection' => 'asc')
                 );    
-                return array('pagination' => $pagination);  
+                return array('pagination' => $pagination,'filtr' => $array_par,"transfiltr" => $trans_arr);  
             }else{
                 $qb = $em->createQueryBuilder();
                 $qb->select('a')
