@@ -10,14 +10,12 @@ Auto giełda
     <div class="alert alert-info">
         {% set array = [] %}
     {% set array = { 'apple': 'unknown' }|merge(transfiltr) %}
-
         <strong><i>Filtrowanie:</i></strong>
         {% for key,value in filtr %}
             <b>[ {{transfiltr[key]}} : {{value}} ]</b>  
         {% endfor %}
     </div>
 {% endif %}
-
 </div>
 <div class="navigation">
     {{ knp_pagination_render(pagination) }}

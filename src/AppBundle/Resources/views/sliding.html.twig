@@ -30,7 +30,6 @@
             <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">&gt;</a>
         </span>
     {% endif %}
-
     {% if last is defined and current != last %}
         <span class="last">
             <a href="{{ path(route, query|merge({(pageParameterName): last})) }}">&gt;&gt;</a>
