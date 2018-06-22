@@ -165,7 +165,7 @@ class DefaultController extends Controller
                     "enginez" => "pojemność",
                     );
                     $qb->setParameters($array_par); 
-                    $querys=$qb->getQuery()->getDQL();
+                    $querys=$qb->getQuery()->getDQL();                  
                     foreach ($qb->getParameters() as $index => $param){  
                         $querys = str_replace(":".$param->getName(), $param->getValue(),$querys);  
                         $querys = str_replace("LIKE ".$param->getValue(), "LIKE '".$param->getValue()."'",$querys);  
