@@ -103,53 +103,53 @@ class DefaultController extends Controller
                     $qb = $em->createQueryBuilder();
                     $qb->select('a')
                     ->from('AppBundle:Cars', 'a');  
-                    if($request->request->get('form')['yearfrom']!=NULL){
+                    if($request->query->get('yearfrom')!=NULL){
                     $qb->where('a.year  >= :yearfrom');   
-                    $array_par['yearfrom']=($request->request->get('form')['yearfrom']);    
+                    $array_par['yearfrom']=($request->query->get('yearfrom'));    
                     }   
-                    if($request->request->get('form')['yearto']!=NULL){
+                    if($request->query->get('yearto')!=NULL){
                     $qb->andwhere('a.year <= :yearto'); 
-                    $array_par['yearto']=($request->request->get('form')['yearto']);
+                    $array_par['yearto']=($request->query->get('yearto'));
                     } 
 
-                    if($request->request->get('form')['pricefrom']!=NULL){
+                    if($request->query->get('pricefrom')!=NULL){
                     $qb->andwhere('a.price >= :pricefrom');  
-                    $array_par['pricefrom']=trim($request->request->get('form')['pricefrom']);
+                    $array_par['pricefrom']=trim($request->query->get('pricefrom'));
                     }     
 
-                    if($request->request->get('form')['priceto']!=NULL){
+                    if($request->query->get('priceto')!=NULL){
                     $qb->andwhere('a.price <= :priceto');   
-                    $array_par['priceto']=trim($request->request->get('form')['priceto']);
+                    $array_par['priceto']=trim($request->query->get('priceto'));
                     }
 
-                    if($request->request->get('form')['enginetype']!=NULL){
+                    if($request->query->get('enginetype')!=NULL){
                     $qb->andwhere('a.enginetype LIKE :enginetype');
-                    $array_par['enginetype']=($request->request->get('form')['enginetype']);
+                    $array_par['enginetype']=($request->query->get('enginetype'));
                     } 
 
-                    if($request->request->get('form')['model']!=NULL){
+                    if($request->query->get('model')!=NULL){
                     $qb->andwhere('a.model LIKE :model');     
-                    $array_par['model']=trim($request->request->get('form')['model']);
+                    $array_par['model']=trim($request->query->get('model'));
                     } 
 
-                    if($request->request->get('form')['mark']!=NULL){
+                    if($request->query->get('mark')!=NULL){
                     $qb->andwhere('a.mark LIKE :mark');    
-                    $array_par['mark']=trim($request->request->get('form')['mark']);
+                    $array_par['mark']=trim($request->query->get('mark'));
                     } 
 
-                    if($request->request->get('form')['bodytype']!=NULL){
+                    if($request->query->get('bodytype')!=NULL){
                     $qb->andwhere('a.bodytype LIKE :bodytype');    
-                    $array_par['bodytype']=($request->request->get('form')['bodytype']);
+                    $array_par['bodytype']=($request->query->get('bodytype'));
                     }
 
-                    if(($request->request->get('form')['enginea']!='0') || ($request->request->get('form')['engineb']!='0')){
+                    if(($request->query->get('enginea')!='0') || ($request->query->get('engineb')!='0')){
                     $qb->andwhere('a.engine = :enginez');   
-                    if((($request->request->get('form')['enginea'])=='0') ){
-                    $array_par['enginez']=('0.'.$request->request->get('form')['engineb']);
-                    }elseif((($request->request->get('form')['engineb'])=='0') ){
-                    $array_par['enginez']=(integer)($request->request->get('form')['enginea'].'.0'); 
+                    if((($request->query->get('enginea'))=='0') ){
+                    $array_par['enginez']=('0.'.$request->query->get('engineb'));
+                    }elseif((($request->query->get('engineb'))=='0') ){
+                    $array_par['enginez']=(integer)($request->query->get('enginea').'.0'); 
                     }else{
-                    $array_par['enginez']=($request->request->get('form')['enginea']).'.'.($request->request->get('form')['engineb']);  
+                    $array_par['enginez']=($request->query->get('enginea')).'.'.($request->query->get('engineb'));  
                     }          
                     }      
 
