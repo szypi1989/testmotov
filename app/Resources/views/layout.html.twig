@@ -33,7 +33,7 @@
                     <li class="{% if app.request.attributes.get('_route') == 'index' %}active{% endif %}"><a href="{{ path('index') }}"><img style="margin-top:-10px;"src="{% if app.request.attributes.get('_route') == 'index' %}{{asset('images/home1.png')}}{% else %}{{asset('images/home2.png')}}{% endif %}" alt="home" width="36px"></a></li>
                     <li>
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="padding:15px;">Wyszukiwarka zaawansowana
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="padding:15px;" data-toggle="tooltip" title="Kliknij aby znaleźć auto według własnego kryterium!">Wyszukiwarka zaawansowana
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <div id="cont_search" class="jumbotron" style="width:800px; height:auto;">
