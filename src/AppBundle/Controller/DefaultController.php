@@ -17,6 +17,16 @@ class DefaultController extends Controller
     {
         $array_par=array();
         $array_year[NULL]=NULL;
+        $trans_sort = array(
+        "year" => "rok produkcji",
+        "price" => "cena",
+        "enginetype" => "typ silnika",
+        "model" => "model",
+        "mark" => "marka",
+        "bodytype" => "typ nadwozia",
+        "engine" => "pojemność silnika",
+        "power" => "moc"
+        );
         $par=array();
         $em = $this->getDoctrine()->getEntityManager();
         if ($request->getMethod() == 'POST'){  
@@ -82,8 +92,8 @@ class DefaultController extends Controller
                 "model" => "model",
                 "mark" => "marka",
                 "bodytype" => "typ_nadwozia",
-                "enginez" => "pojemność",
-                );
+                "enginez" => "pojemność"
+                );               
                 $qb->setParameters($array_par); 
                 $querys=$qb->getQuery()->getDQL();
                     foreach ($qb->getParameters() as $index => $param){  
@@ -97,7 +107,7 @@ class DefaultController extends Controller
                 $request->query->getInt('page', 1)/*page number*/,
                 5/*limit per page*/,array('defaultSortFieldName' => 'a.model', 'defaultSortDirection' => 'asc')
                 );    
-                return array('pagination' => $pagination,'filtr' => $array_par,"transfiltr" => $trans_arr);  
+                return array('pagination' => $pagination,'filtr' => $array_par,"transfiltr" => $trans_arr,"transsort" => $trans_sort);  
             }else{
                 if($request->query->get('search')=="1"){
                     $qb = $em->createQueryBuilder();
@@ -177,7 +187,7 @@ class DefaultController extends Controller
                     $request->query->getInt('page', 1)/*page number*/,
                     5/*limit per page*/,array('defaultSortFieldName' => 'a.model', 'defaultSortDirection' => 'asc')
                     );    
-                    return array('pagination' => $pagination,'filtr' => $array_par,"transfiltr" => $trans_arr);  
+                    return array('pagination' => $pagination,'filtr' => $array_par,"transfiltr" => $trans_arr,"transsort" => $trans_sort);  
                 }else{
                     $qb = $em->createQueryBuilder();
                     $qb->select('a')
@@ -190,7 +200,7 @@ class DefaultController extends Controller
                     $request->query->getInt('page', 1)/*page number*/,
                     5/*limit per page*/,array('defaultSortFieldName' => 'a.model', 'defaultSortDirection' => 'asc')
                     );    
-                    return array('pagination' => $pagination);      
+                    return array('pagination' => $pagination,"transsort" => $trans_sort);      
                 }              
             }
 
